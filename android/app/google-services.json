@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "163542924358",
+    "project_id": "flutter-gpt-c227e",
+    "storage_bucket": "flutter-gpt-c227e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163542924358:android:43a16cf8c1fa88e1a59e47",
+        "android_client_info": {
+          "package_name": "com.fluttergpt.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPlWmHeneYmyIPVSkCI8_W-85mO8vJzdI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
