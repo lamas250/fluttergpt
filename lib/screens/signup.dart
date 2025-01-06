@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttergpt/screens/chat.dart';
 import 'package:fluttergpt/services/firebase_helper.dart';
+import 'package:fluttergpt/app_routes.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -149,10 +150,7 @@ class _SignupScreenState extends State<SignupScreen> {
     });
 
     if (result) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const ChatScreen()),
-      );
+      AppRoutes.navigateTo(context, AppRoutes.chat);
     }
   }
 }
