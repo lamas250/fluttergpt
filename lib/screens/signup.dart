@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttergpt/screens/chat.dart';
 import 'package:fluttergpt/services/firebase_helper.dart';
 import 'package:fluttergpt/app_routes.dart';
 
@@ -33,6 +32,7 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   bool _isLoading = false;
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -72,8 +72,22 @@ class _SignupScreenState extends State<SignupScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: TextFormField(
                     controller: _passwordController,
-                    obscureText: true,
-                    decoration: const InputDecoration(labelText: 'Password'),
+                    obscureText: _obscureText,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                      ),
+                    ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your password';
@@ -138,19 +152,28 @@ class _SignupScreenState extends State<SignupScreen> {
       _isLoading = true;
     });
 
-    final result = await FirebaseHelper.signUp(
-      context,
-      _emailController.text,
-      _passwordController.text,
-      _nameController.text,
-    );
+    try {
+      final result = await FirebaseHelper.signUp(
+        _emailController.text,
+        _passwordController.text,
+        _nameController.text,
+      );
 
-    setState(() {
-      _isLoading = false;
-    });
+      setState(() {
+        _isLoading = false;
+      });
 
-    if (result) {
-      AppRoutes.navigateTo(context, AppRoutes.chat);
+      if (result) {
+        AppRoutes.navigateTo(context, AppRoutes.chat);
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.toString())),
+      );
+
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 }

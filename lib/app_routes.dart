@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttergpt/screens/chat.dart';
+import 'package:fluttergpt/screens/signin.dart';
 import 'package:fluttergpt/screens/signup.dart';
 
 class AppRoutes {
+  static const String signin = '/signin';
   static const String signup = '/signup';
   static const String chat = '/chat';
 
@@ -27,6 +29,7 @@ class AppRoutes {
   }
 
   static Map<String, WidgetBuilder> get routes => {
+        signin: (context) => const SigninScreen(),
         signup: (context) => const SignupScreen(),
         chat: (context) => const ChatScreen(),
       };
