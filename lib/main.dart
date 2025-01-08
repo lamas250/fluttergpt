@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fluttergpt/services/firebase_helper.dart';
 import 'firebase_options.dart';
-import 'screens/signin.dart';
 import 'app_routes.dart';
+
+late final Widget screen;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,6 +12,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  screen = FirebaseHelper.authenticatedScreen;
 
   runApp(const MyApp());
 }
@@ -20,12 +24,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const SigninScreen(),
+      home: screen,
       routes: AppRoutes.routes,
     );
   }
